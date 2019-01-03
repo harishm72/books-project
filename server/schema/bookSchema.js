@@ -1,5 +1,4 @@
 let mongoose = require('mongoose');
-let data = require('./data.json');
 
 mongoose.connect('mongodb://localhost:27017/booksProject', { useNewUrlParser: true })
 
@@ -15,8 +14,9 @@ let bookSchema = new mongoose.Schema({
     "website": String
 }, {versionKey : false})
 
+
 const book = module.exports =  mongoose.model('book', bookSchema);
 
-module.exports.getBooks = (callback) =>{
-    book.find(callback)
+module.exports.getBooks = (callback) => {
+    book.find(callback);
 }

@@ -1,33 +1,60 @@
-let express = require('express');
-let mongoose = require('mongoose');
+const express = require('express')
+const path = require('path');
+const bodyParser = require('body-parser');
+const Joi = require('joi')
 
-let path = require('path');
+const books = require('./routes/books')
+const wantToRead = require('./routes/want-to-read')
+const reading = require('./routes/reading')
+const read = require('./routes/read')
 
-let bookModel = require('./bookSchema.js')
+const userModel = require('./schema/userSchema')
+const bookModel = require('./schema/bookSchema')
 
-let app = express();
-let port = 3000;
 
-mongoose.connect('mongodb://localhost:27017/booksProject', { useNewUrlParser: true })
+const app = express();
+const port = 3000;
 
-let db = mongoose.connection;
+app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, "../client")))
-
-app.get("/", (req, res) => res.send("Home page!!!"))
-
-app.get("/books", (req, res) => {
-    bookModel.getBooks((err, books) =>{
-        res.json(books);
-    })
+app.use("/api", (req, res, next) => {
+    userModel.findOne({
+            "userName": req.get("userName")
+        })
+        .then(data => {
+            if (data !== null)
+                next();
+            else res.status(401).send("Unauthorized")
+        })
+        .catch(err => res.status(404).send(err.message))
 })
 
-app.get("/books/:id" , (req, res) =>{
-    bookModel.getBooks((err, books) =>{      
-        books.forEach(element => {
-            if(element['isbn'] == req.params.id )
-            res.send(element)    
-        });
-        
-    })
+app.use("/api/list", (req, res, next) => {
+    if (req.method === "POST") {
+        let currentBook = req.body;
+        let bookSchema = Joi.object().keys({
+            "isbn": Joi.string()
+        })
+        let joiResult = Joi.validate(currentBook, bookSchema)
+        if (joiResult.error !== null || Object.keys(currentBook).length === 0)
+            return res.status(400).send(`Invalid Book!`);
+        bookModel.findOne({
+            "isbn": currentBook.isbn
+        }).then(data => {
+            if (data !== null)
+                return next();
+            else res.status(400).send(`book with isbn ${currentBook.isbn} doesn't exist!`)
+        })
+    } else next();
 })
+
+app.use("/api", books);
+app.use("/api/list/want-to-read", wantToRead)
+app.use("/api/list/reading", reading)
+app.use("/api/list/read", read)
+
+
+app.get("/", (req, res) => res.send("Hey man!!! Welcome to BookStore!"))
+
 app.listen(port, console.log(`i'm listening on port ${port}`))
