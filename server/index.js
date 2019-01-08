@@ -18,7 +18,39 @@ const port = 3000;
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "../client")))
-app.use("/api", (req, res, next) => {
+
+app.use("/register", (req, res, next) => {
+    if (req.method === "POST") {
+        let currentUser = req.body
+        if (currentUser === undefined || currentUser.length === 0) {
+            return res.status(400).send("Request body Missing!!")
+        }
+        let userSchema = Joi.object().keys({
+            "userName": Joi.string().min(3)
+        })
+        let joiResult = Joi.validate(req.body, userSchema)
+
+        if (joiResult.error !== null) {
+            return res.status(400).send(`invalid`)
+        }
+        userModel.findOne({
+                "userName": currentUser.userName
+            })
+            .then(data => {
+                if (data !== null)
+                    return res.status(400).send(`exists`)
+                else if (data === null){
+                let model = new userModel(currentUser)
+                model.save((err) => {
+                 res.status(201).send(`created`)
+                    next();
+                })
+            }
+            }).catch(err => res.send(500).send())
+
+    }
+})
+app.use("/api/list", (req, res, next) => {
     userModel.findOne({
             "userName": req.get("userName")
         })
@@ -48,7 +80,6 @@ app.use("/api/list", (req, res, next) => {
         })
     } else next();
 })
-
 app.use("/api", books);
 app.use("/api/list/want-to-read", wantToRead)
 app.use("/api/list/reading", reading)

@@ -1,0 +1,268 @@
+body {
+    font-family: Roboto, sans-serif;
+    background-image: url(../resources/backgrounds/8.jpg);
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+.heading {
+    width: 90%;
+    height: 4em;
+    margin-left: 6%;
+    margin-top: 1em;
+    background-color: transparent;
+    color: white;
+    display: flex;
+    border-radius: 4px;
+    text-decoration: underline;
+}
+
+.logo {
+    width: 60px;
+    padding: 0.5em;
+    justify-self: flex-start;
+}
+
+.welcome-text {
+    align-self: center;
+    padding-left: 48px;
+    font-size: x-large;
+}
+
+.search-box {
+    display: flex;
+    margin-left: 25%;
+}
+
+/* search button */
+#myInput {
+    visibility: hidden;
+    background-image: url('../resources/others/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 50%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    border-radius: 4px; 
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+/* ends her search */
+/*----------------------------------------------*/
+.user-access {
+    height: 4em;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent;
+    color: white;
+    border-radius: 4px;
+}
+
+.login,
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.login button,
+.register button {
+    background-color: azure;
+    border: none;
+    border-radius: 4px;
+    align-self: center;
+    width: 9em;
+    height: 2em;
+}
+
+.login button:focus,
+.register button:focus,
+.logout button:focus {
+    background-color: black;
+    color: white;
+
+}
+
+.login-form,
+.register-form {
+    padding: 1em 0 1em 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 25% 0 25%;
+}
+
+#newUser,
+#userName {
+    text-align: center;
+    border: none;
+    height: 2.5em;
+}
+
+.logout {
+    display: none;
+}
+
+/*----------------------------------------------*/
+
+/*----------------------------------------------*/
+.left {}
+
+.right {
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 1em;
+}
+
+.bookshelf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.booklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.booklist img {
+    align-self: center;
+    list-style: none;
+    width: 125px;
+    height: 150px;
+    padding: 0.5em;
+}
+
+.booklist p {
+    align-self: center;
+    padding: 0.5em;
+}
+
+.booklist select {
+    align-self: center;
+    padding: 0.5em;
+    background-color: green;
+    width: 9em;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+
+.booklist li {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.user-list {
+    width: 100%;
+    display: grid;
+    visibility: hidden;
+    /* grid-template-rows: 1fr 1fr 1fr; */
+}
+
+.user-list ul {
+    display: grid;
+}
+
+.user-list p {}
+
+.user-list div {
+    padding: 1em 0 1em 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-list img {
+    align-self: center;
+    list-style: none;
+    width: 125px;
+    height: 150px;
+    padding: 0.5em;
+}
+
+.list-read,
+.list-reading,
+.list-want-to-read {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.list-read li,
+.list-reading li,
+.list-want-to-read li {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.book-delete {
+    align-self: center;
+    background-color: green;
+    border: none;
+    width: 8em;
+    height: 2em;
+    border-radius: 4px;
+    color: white;
+}
+
+.login-submit,
+.register-submit {
+    background-color: green;
+    border: none;
+    width: auto;
+    height: 2em;
+    border-radius: 4px;
+    color: white;
+}
+
+.list-read img,
+.list-reading img,
+.list-want-to-read img {
+    align-self: center;
+    list-style: none;
+    width: 125px;
+    height: 150px;
+    padding: 0.5em;
+}
+
+.list-read p,
+.list-reading p,
+.list-want-to-read p {
+    align-self: center;
+    padding: 0.5em;
+}
+
+.list-read select,
+.list-reading select,
+.list-want-to-read select {
+    align-self: center;
+    padding: 0.5em;
+    background-color: green;
+    width: 9em;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}

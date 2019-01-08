@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>MountBlue Press</title>
+    <link rel="icon" href="./resources/others/images.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="./style/cssReset.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./scripts/main.js"></script>
+
 </head>
+
 <body>
-    <h1>Hello from Html</h1>
+    <section id="bookshelf" class="bookshelf">
+        <div id="left" class="left">
+            <header class="heading">
+                <img class="logo" src="./resources/others/logo.png">
+                <p class="welcome-text">Welcome To BookClub.</p>
+            </header>
+            <div class="search-box">
+                <input type="text" id="myInput" onforminput="submit" placeholder="Search for books.." title="Type in a book name">
+            </div>
+            <ul id="booklist" class="booklist">
+            </ul>
+        </div>
+        <div id="right" class="right">
+            <header class="user-access">
+                <div class="login">
+                    <button class="login-button">Login</button>
+                    <p>Already a user, just Login.</p>
+                </div>
+                <div class="register">
+                    <button class="register-button">Register</button>
+                    <p>New to BookClub, register with us.</p>
+                </div>
+            </header>
+            <div class="logout">
+                <input type="submit" value="Logout">
+            </div>
+            <div id="form-container"></div>
+            <div id="register-container"></div>
+            <div class="user-list">
+                <div>
+                    <p>Want-to-read.</p>
+                    <ul class="list-want-to-read"></ul>
+                </div>
+                <div>
+                    <p>Reading.</p>
+                    <ul class="list-reading"></ul>
+                </div>
+                <div>
+                    <p>Read.</p>
+                    <ul class="list-read"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>

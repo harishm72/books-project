@@ -10,8 +10,8 @@ mongoose.connect('mongodb://localhost:27017/booksProject', {
 
 router.get("/books", (req, res) => {
     bookModel.find()
-        .then(data => res.send(data))
-        .catch(err => res.status(404).send(err.message))
+        .then(data => res.json(data))
+        .catch(err => res.status(500).send(err.message))
 })
 router.get("/books/:id", (req, res) => {
     let bookId = req.params.id;
@@ -19,7 +19,7 @@ router.get("/books/:id", (req, res) => {
             "isbn": bookId
         })
         .then(data => data ? res.send(data) : res.status(400).send(`book ${bookId} not found!!!`))
-        .catch(err => res.status(400).send(err.message))
+        .catch(err => res.status(500).send(err.message))
 })
 
 module.exports = router

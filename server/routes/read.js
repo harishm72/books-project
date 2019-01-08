@@ -24,7 +24,8 @@ router.post("/", (req, res) => {
             "userName": currentUser
         })
         .then(userData => {
-            let currentList = userData['read'].map(book => book['isbn'])
+            let allLists = userData['want-to-read'].concat(userData['read'], userData['reading'])
+            let currentList = allLists.map(book => book['isbn'])
             if (currentList.includes(currentBook.isbn))
                 return res.status(400).send(`book with isbn ${currentBook.isbn} already exists in list`)
             userModel.findOneAndUpdate({
@@ -58,11 +59,12 @@ router.delete("/:id", (req, res) => {
                             "isbn": bookId
                         }
                     }
+                }, {
+                    new: true
                 })
                 .then(currentBook => res.status(201).json(currentBook))
         })
         .catch(err => res.status(400).send(err.message))
-
 })
 
 module.exports = router;
