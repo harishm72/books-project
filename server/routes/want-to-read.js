@@ -28,16 +28,16 @@ router.post("/", (req, res) => {
             let currentList = allLists.map(book => book['isbn'])
             if (currentList.includes(currentBook.isbn))
                 return res.status(400).send(`book with isbn ${currentBook.isbn} already exists in list`)
-            userModel.findOneAndUpdate({
+            return userModel.findOneAndUpdate({
                 "userName": currentUser
             }, {
                 $push: {
                     "want-to-read": currentBook
                 }
-            }).then(res.status(201).send(currentBook))
+            })
         })
-
-        .catch(err => res.status(400).send(err.message))
+        .then(() => res.status(201).send(currentBook))
+        .catch(err => res.status(500).send(err.message))
 })
 
 
